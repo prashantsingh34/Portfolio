@@ -33,12 +33,10 @@ jobs:
       - store_artifacts:
           path: ~/artifacts
           destination: node-build
-  # deploy:
-  #   steps:
-  #     # Replace this with steps to deploy to users
-  #     - run:
-  #         name: Deploy to GCE 
-  #         command: './deploy.sh'
+  deploy:
+    - run:
+        name: Deploy to GCE 
+        command: './deploy.sh'
 workflows:
   build-and-test:
     jobs:
@@ -46,3 +44,6 @@ workflows:
       - build-node:
           requires:
             - test-node
+      - deploy:
+          requires:
+            - build-node
