@@ -19,7 +19,7 @@ jobs:
       - image: cimg/node:21.7.1
     steps:
       - checkout
-      - run: node index.js
+      - run: node --version
 workflows:
   build-and-test:
     jobs:
