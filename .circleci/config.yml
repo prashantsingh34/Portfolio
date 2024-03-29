@@ -14,38 +14,17 @@ jobs:
       - run:
           name: Run tests
           command: npm test --passWithNoTests
-  build-node:
-    # Build node project
-    executor: node/default
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run:
-          command: npm run build
-      - run:
-          name: Create the ~/artifacts directory if it doesn't exist
-          command: mkdir -p ~/artifacts
-      # Copy output to artifacts dir
-      - run:
-          name: Copy artifacts
-          command: cp -R build dist public .output .next .docusaurus ~/artifacts 2>/dev/null || true
-      - store_artifacts:
-          path: ~/artifacts
-          destination: node-build
   build:
     docker:
       - image: cimg/node:21.7.1
     steps:
       - checkout
-      - run: node --version
+      - run: node index.js
 workflows:
   build-and-test:
     jobs:
       - test-node
-      - build-node:
+      - build:
           requires:
             - test-node
-      - deploy:
-          requires:
-            - build-node
+
