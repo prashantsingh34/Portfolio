@@ -47,6 +47,6 @@ workflows:
           requires:
             - test-node
       - deploy:
-        requires:
-          - test-node
-          - build-node
+          requires:
+            - test-node
+            - build-node
