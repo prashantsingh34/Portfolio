@@ -48,5 +48,4 @@ workflows:
             - test-node
       - deploy:
           requires:
-            - test-node
             - build-node
