@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            gcloud build -t portfolio-image .
+            gcloud builds -t portfolio-image .
 workflows:
   build-and-test:
     jobs:
