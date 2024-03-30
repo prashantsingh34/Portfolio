@@ -34,8 +34,8 @@ jobs:
             gcloud auth configure-docker us-central1-docker.pkg.dev
       - run:
           name: Docker build
-            command: |
-              docker build -t portfolio .
+          command: |
+            docker build -t portfolio .
 workflows:
   build-and-test:
     jobs:
