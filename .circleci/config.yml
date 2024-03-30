@@ -39,8 +39,5 @@ workflows:
       - deploy:
           requires:
             - test-node
-      - build-docker-image:
-           requires:
-              - test-node
-              - deploy
+
 
