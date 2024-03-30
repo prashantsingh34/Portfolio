@@ -28,6 +28,12 @@ jobs:
             echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
               gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
               gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+  build-docker-image:
+      steps:
+        - run:
+            name: Build Docker image
+            command: |
+              docker build -t project-image .
 workflows:
   build-and-test:
     jobs:
@@ -35,4 +41,8 @@ workflows:
       - deploy:
           requires:
             - test-node
+      - build-docker-image:
+           requires:
+              - test-node
+              - deploy
 
