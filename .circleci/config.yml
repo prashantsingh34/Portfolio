@@ -40,7 +40,10 @@ jobs:
       - run:
           name: Docker build
           command: |
-            sudo usermod -aG docker $USER \
+            sudo usermod -aG docker $USER 
+      - run:
+          name: Docker user setup
+          command: |
             docker build -t portfolio .
       
 workflows:
