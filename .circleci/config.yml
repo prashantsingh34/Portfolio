@@ -37,7 +37,10 @@ jobs:
       - image: cimg/node:21.7.1
     steps:
       - checkout
-      - run: docker build -t portfolio .
+      - run:
+          name: Docker build
+          command: |
+            docker build -t portfolio .
       
 workflows:
   build-and-test:
