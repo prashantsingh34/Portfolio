@@ -46,6 +46,6 @@ workflows:
       - deploy:
           requires:
             - test-node
-      - dockerise
+      - build
 
 
