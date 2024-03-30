@@ -32,14 +32,12 @@ jobs:
           name: Set up Docker for gcloud
           command: |
             gcloud auth configure-docker us-central1-docker.pkg.dev
-  dockerise:
+  build:
     docker:
-      - image: cimg/node:latest
+      - image: cimg/node:21.7.1
     steps:
       - checkout
-      -run:
-         name: Dockr buidls finally
-         command: docker build -t portfolio .
+      - run: docker build -t portfolio .
       
 workflows:
   build-and-test:
