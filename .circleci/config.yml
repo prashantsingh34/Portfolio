@@ -50,9 +50,12 @@ jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
-    working_directory: ~/repo
+    # working_directory: ~/repo
+
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           name: Set up GCloud
           command: |
@@ -63,6 +66,10 @@ jobs:
           name: Set up Docker for gcloud
           command: |
             gcloud auth configure-docker us-central1-docker.pkg.dev
+      - run:
+          name: Docker version
+          command: |
+            docker version
       
 workflows:
   build-and-test:
