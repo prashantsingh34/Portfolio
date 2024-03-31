@@ -59,6 +59,7 @@ jobs:
 workflows:
   build-and-test:
     jobs:
+      - login-to-docker
       - test-node
       - deploy:
           requires:
