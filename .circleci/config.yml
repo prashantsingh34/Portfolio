@@ -67,7 +67,7 @@ jobs:
           command: |
             gcloud auth configure-docker us-central1-docker.pkg.dev
       - run:
-          name: Docker user setup
+          name: Docker build
           command: |
             docker build -t react-app .
       - run:

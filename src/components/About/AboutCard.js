@@ -9,12 +9,11 @@ function AboutCard() {
         <blockquote className="blockquote mb-0">
           <p style={{ textAlign: "justify" }}>
             Hi Everyone, I am <span className="purple">Prashant Singh</span>
-            from <span className="purple"> Bhubaneswar, India.</span>
+            from <span className="purple"> Pune, India.</span>
             <br />
-            I am currently employed as a software developer at Juspay.
+            I am currently employed as a systems engineer at -=@#$%.
             <br />
-            I have completed Integrated MSc (IMSc) in Maths and Computing at BIT
-            Mesra.
+            I have completed B.Tech from I.E.T. Lucknow
             <br />
             <br />
             Apart from coding, some other activities that I love to do!
@@ -25,9 +24,6 @@ function AboutCard() {
             </li>
             <li className="about-activity">
               <ImPointRight /> Writing Tech Blogs
-            </li>
-            <li className="about-activity">
-              <ImPointRight /> Travelling
             </li>
           </ul>
 
