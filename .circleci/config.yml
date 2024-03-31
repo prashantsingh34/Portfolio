@@ -42,8 +42,8 @@ jobs:
       - image: cimg/node:21.7.1
     steps:
       - checkout
-      # - setup_remote_docker:
-      #     docker_layer_caching: false
+      - setup_remote_docker:
+          docker_layer_caching: false
       - run:
           name: Docker version
           command: |
