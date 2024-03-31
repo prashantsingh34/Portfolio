@@ -4,6 +4,11 @@ version: 2.1
 orbs:
   node: circleci/node@5
   gcp-cli: circleci/gcp-cli@3.1.1  # Replace with the desired version
+environment:
+  variables:
+    DOCKER_USERNAME: $DOCKER_USERNAME  # Reference the secure storage location
+    DOCKER_PASSWORD: $DOCKER_PASSWORD  # Reference the secure storage location
+
 
 jobs:
   test-node:
@@ -37,6 +42,10 @@ jobs:
       - image: ubuntu-2204
     steps:
       - checkout
+      - run:
+          name: Login to Docker registry
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - run:
           name: Docker version
           command: |
