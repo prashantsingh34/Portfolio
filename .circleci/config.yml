@@ -11,12 +11,6 @@ environment:
 
 
 jobs:
-  login-to-docker:
-    steps:
-      - run:
-          name: Login to Docker registry
-          command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   test-node:
     # Install node dependencies and run tests
     executor: node/default
@@ -60,7 +54,6 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - login-to-docker
       - test-node
       - deploy:
           requires:
