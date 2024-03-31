@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Docker version
           command: |
-            Docker version
+            docker version
       - run:
           name: Docker user setup
           command: |
