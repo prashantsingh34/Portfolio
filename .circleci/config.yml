@@ -54,7 +54,7 @@ jobs:
       - run:
           name: Docker user setup
           command: |
-            docker build -t portfolio .
+            docker build -t react-app .
       - run:
           name: Tag Docker image
           command: |
