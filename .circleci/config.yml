@@ -34,7 +34,7 @@ jobs:
             gcloud auth configure-docker us-central1-docker.pkg.dev
   build:
     docker:
-      - image: cimg/gcp:2024.03
+      - image: ubuntu-2204:2024.01.2
     steps:
       - checkout
       - run:
