@@ -39,7 +39,7 @@ jobs:
   #           gcloud auth configure-docker us-central1-docker.pkg.dev
   build:
     docker:
-      - image: circleci/node:21.7.1
+      - image: cimg/node:21.7.1
     steps:
       - checkout
       - setup_remote_docker:
