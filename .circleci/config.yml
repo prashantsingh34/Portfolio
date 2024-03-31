@@ -37,11 +37,11 @@ jobs:
           name: Set up Docker for gcloud
           command: |
             gcloud auth configure-docker us-central1-docker.pkg.dev
-  build:
-    docker:
-      - image: ubuntu-2204
-    steps:
-      - checkout
+  # build:
+  #   docker:
+  #     - image: ubuntu-2204
+  #   steps:
+  #     - checkout
       - run:
           name: Docker version
           command: |
@@ -58,6 +58,6 @@ workflows:
       - deploy:
           requires:
             - test-node
-      - build
+      # - build
 
 
