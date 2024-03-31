@@ -62,6 +62,6 @@ workflows:
       - deploy
           # requires:
           #   - test-node
-      # - build
+      - build
 
 
