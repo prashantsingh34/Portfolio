@@ -1,8 +1,8 @@
 # This config was automatically generated from your source code
 # Stacks detected: deps:node:.
 version: 2.1
-# orbs:
-#   node: circleci/node@5
+orbs:
+  node: circleci/node@5
 #   gcp-cli: circleci/gcp-cli@3.1.1  # Replace with the desired version
 environment:
   variables:
@@ -21,22 +21,22 @@ jobs:
       - run:
           name: Run tests
           command: npm test --passWithNoTests
-  deploy:
-    docker:
-      - image: google/cloud-sdk
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run:
-          name: Set up GCloud
-          command: |
-            echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
-              gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-              gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-      - run:
-          name: Set up Docker for gcloud
-          command: |
-            gcloud auth configure-docker us-central1-docker.pkg.dev
+  # deploy:
+  #   docker:
+  #     - image: google/cloud-sdk
+  #   working_directory: ~/repo
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Set up GCloud
+  #         command: |
+  #           echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
+  #             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+  #             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+  #     - run:
+  #         name: Set up Docker for gcloud
+  #         command: |
+  #           gcloud auth configure-docker us-central1-docker.pkg.dev
   build:
     docker:
       - image: circle/node:21.7.1
@@ -59,7 +59,7 @@ workflows:
   build-and-test:
     jobs:
       - test-node
-      - deploy
+      # - deploy
           # requires:
           #   - test-node
       - build
