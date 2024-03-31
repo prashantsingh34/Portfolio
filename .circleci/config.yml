@@ -3,6 +3,13 @@
 version: 2.1
 orbs:
   node: circleci/node@5
+#   gcp-cli: circleci/gcp-cli@3.1.1  # Replace with the desired version
+environment:
+  variables:
+    DOCKER_USERNAME: $DOCKER_USERNAME  # Reference the secure storage location
+    DOCKER_PASSWORD: $DOCKER_PASSWORD  # Reference the secure storage location
+
+
 jobs:
   test-node:
     # Install node dependencies and run tests
@@ -14,41 +21,49 @@ jobs:
       - run:
           name: Run tests
           command: npm test --passWithNoTests
-  build-node:
-    # Build node project
-    executor: node/default
+  # deploy:
+  #   docker:
+  #     - image: google/cloud-sdk
+  #   working_directory: ~/repo
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Set up GCloud
+  #         command: |
+  #           echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
+  #             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+  #             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+  #     - run:
+  #         name: Set up Docker for gcloud
+  #         command: |
+  #           gcloud auth configure-docker us-central1-docker.pkg.dev
+  build:
+    docker:
+      - image: cimg/node:21.7.1
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
+      - setup_remote_docker:
+          docker_layer_caching: false
       - run:
-          command: npm run build
+          name: Docker version
+          command: |
+            docker version
       - run:
-          name: Create the ~/artifacts directory if it doesn't exist
-          command: mkdir -p ~/artifacts
-      # Copy output to artifacts dir
+          name: Check if docker is running
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - run:
-          name: Copy artifacts
-          command: cp -R build dist public .output .next .docusaurus ~/artifacts 2>/dev/null || true
-      - store_artifacts:
-          path: ~/artifacts
-          destination: node-build
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
-    docker:
-      - image: cimg/base:stable
-    steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+          name: Docker user setup
+          command: |
+            docker build -t portfolio .
+      
 workflows:
   build-and-test:
     jobs:
       - test-node
-      - build-node:
-          requires:
-            - test-node
-    # - deploy:
-    #     requires:
-    #       - build-node
+      # - deploy
+          # requires:
+          #   - test-node
+      - build
+
+
