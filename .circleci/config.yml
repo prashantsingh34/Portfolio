@@ -20,22 +20,6 @@ jobs:
       - run:
           name: Run tests
           command: npm test --passWithNoTests
-  # deploy:
-  #   docker:
-  #     - image: google/cloud-sdk
-  #   working_directory: ~/repo
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Set up GCloud
-  #         command: |
-  #           echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
-  #             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-  #             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-  #     - run:
-  #         name: Set up Docker for gcloud
-  #         command: |
-  #           gcloud auth configure-docker us-central1-docker.pkg.dev
   build:
     docker:
       - image: cimg/node:21.7.1
@@ -59,6 +43,22 @@ jobs:
           name: Tag Docker image
           command: |
             docker tag react-app us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Set up GCloud
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode | gcloud auth activate-service-account --key-file=-
+              gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+              gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      - run:
+          name: Set up Docker for gcloud
+          command: |
+            gcloud auth configure-docker us-central1-docker.pkg.dev
       
 workflows:
   build-and-test:
@@ -68,5 +68,6 @@ workflows:
           # requires:
           #   - test-node
       - build
+      - deploy
 
 
