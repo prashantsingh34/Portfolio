@@ -20,33 +20,33 @@ jobs:
       - run:
           name: Run tests
           command: npm test --passWithNoTests
-  build:
-    docker:
-      - image: cimg/node:21.7.1
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: false
-      - run:
-          name: Docker version
-          command: |
-            docker version
-      - run:
-          name: Check if docker is running
-          command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - run:
-          name: Docker user setup
-          command: |
-            docker build -t react-app .
-      - run:
-          name: Tag Docker image
-          command: |
-            docker tag react-app us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
-      - run:
-          name: Push docker image
-          command: | 
-            docker push us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
+  # build:
+  #   docker:
+  #     - image: cimg/node:21.7.1
+  #   steps:
+  #     - checkout
+  #     - setup_remote_docker:
+  #         docker_layer_caching: false
+  #     - run:
+  #         name: Docker version
+  #         command: |
+  #           docker version
+  #     - run:
+  #         name: Check if docker is running
+  #         command: |
+  #           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  #     - run:
+  #         name: Docker user setup
+  #         command: |
+  #           docker build -t react-app .
+  #     - run:
+  #         name: Tag Docker image
+  #         command: |
+  #           docker tag react-app us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
+  #     - run:
+  #         name: Push docker image
+  #         command: | 
+  #           docker push us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
   deploy:
     docker:
       - image: google/cloud-sdk
@@ -67,9 +67,17 @@ jobs:
           command: |
             gcloud auth configure-docker us-central1-docker.pkg.dev
       - run:
-          name: Docker version
+          name: Docker user setup
           command: |
-            docker version
+            docker build -t react-app .
+      - run:
+          name: Tag Docker image
+          command: |
+            docker tag react-app us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
+      - run:
+          name: Push docker image
+          command: | 
+            docker push us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
       
 workflows:
   build-and-test:
@@ -78,7 +86,7 @@ workflows:
       # - deploy
           # requires:
           #   - test-node
-      - build
+      # - build
       - deploy
 
 
