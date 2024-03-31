@@ -42,10 +42,10 @@ jobs:
   #     - image: ubuntu-2204
   #   steps:
   #     - checkout
-      - run:
-          name: Docker version
-          command: |
-            docker version
+      # - run:
+      #     name: Docker version
+      #     command: |
+      #       docker version
       - run:
           name: Check if docker is running
           command: |
