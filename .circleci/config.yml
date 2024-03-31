@@ -91,6 +91,10 @@ workflows:
           # requires:
           #   - test-node
       # - build
-      - deploy
+      - deploy:
+          filters:
+             branches:
+               only:
+                 - master
 
 
