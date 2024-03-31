@@ -38,9 +38,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Docker build
-          command: |
-            sudo usermod -aG docker $USER 
+          # name: Docker build
+          # command: |
+          #   sudo usermod -aG docker $USER 
       - run:
           name: Docker user setup
           command: |
