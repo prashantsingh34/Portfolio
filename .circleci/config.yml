@@ -43,6 +43,10 @@ jobs:
           name: Tag Docker image
           command: |
             docker tag react-app us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
+      - run:
+          name: Push docker image
+          command: | 
+            docker push us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
   deploy:
     docker:
       - image: google/cloud-sdk
