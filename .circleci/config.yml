@@ -1,9 +1,9 @@
 # This config was automatically generated from your source code
 # Stacks detected: deps:node:.
 version: 2.1
-orbs:
-  node: circleci/node@5
-  gcp-cli: circleci/gcp-cli@3.1.1  # Replace with the desired version
+# orbs:
+#   node: circleci/node@5
+#   gcp-cli: circleci/gcp-cli@3.1.1  # Replace with the desired version
 environment:
   variables:
     DOCKER_USERNAME: $DOCKER_USERNAME  # Reference the secure storage location
