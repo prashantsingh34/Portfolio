@@ -47,6 +47,10 @@ jobs:
           command: |
             docker version
       - run:
+          name: Check if docker is running
+          command: |
+            sudo systemctl status docker
+      - run:
           name: Docker user setup
           command: |
             docker build -t portfolio .
