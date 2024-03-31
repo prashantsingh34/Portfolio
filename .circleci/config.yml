@@ -49,7 +49,7 @@ jobs:
       - run:
           name: Check if docker is running
           command: |
-            which sudo
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - run:
           name: Docker user setup
           command: |
