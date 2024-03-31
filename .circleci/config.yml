@@ -11,6 +11,11 @@ environment:
 
 
 jobs:
+  login-to-docker:
+    - run:
+        name: Login to Docker registry
+        command: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   test-node:
     # Install node dependencies and run tests
     executor: node/default
@@ -42,10 +47,6 @@ jobs:
       - image: ubuntu-2204
     steps:
       - checkout
-      - run:
-          name: Login to Docker registry
-          command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - run:
           name: Docker version
           command: |
