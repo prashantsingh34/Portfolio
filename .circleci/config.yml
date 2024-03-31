@@ -37,10 +37,10 @@ jobs:
       - image: cimg/gcp:2024.03
     steps:
       - checkout
-      # - run:
-          # name: Docker build
-          # command: |
-          #   sudo usermod -aG docker $USER 
+      - run:
+          name: Docker version
+          command: |
+            Docker version
       - run:
           name: Docker user setup
           command: |
