@@ -81,7 +81,7 @@ jobs:
       - run:
           name: Update the container image for the instance
           command: |
-            gcloud compute instances update-container instance-20240330-100812 --zone us-west4-b  --container-image=us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image:latest
+            gcloud compute instances update-container instance-20240410-191249 --zone us-west4-b  --container-image=us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image:latest
       
 workflows:
   build-and-test:
