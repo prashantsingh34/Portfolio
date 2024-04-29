@@ -45,12 +45,14 @@ jobs:
           command: | 
             docker push us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
   deploy:
+    docker:
+      - image: google/cloud-sdk
     steps:
       - checkout    
       - run:
           name: Update the container image for the instance
           command: |
-            node -v
+            gcloud compute instances update-container instance-20240410-191249 --zone us-west4-b  --container-image=us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image:latest
       
 workflows:
   build-test-deploy:
