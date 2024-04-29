@@ -92,6 +92,7 @@ workflows:
           #   - test-node
       # - build
       - deploy:
+          type: approval
           filters:
              branches:
                only:
