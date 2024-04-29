@@ -44,6 +44,9 @@ jobs:
           name: Push docker image
           command: | 
             docker push us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
+  release-approval:
+    steps:
+      - checkout
   deploy:
     docker:
       - image: google/cloud-sdk
@@ -64,7 +67,7 @@ workflows:
     jobs:
       - test-node
       - build
-      - deploy:
+      - release-approval:
           type: approval
           requires:
             - test-node
@@ -73,5 +76,14 @@ workflows:
              branches:
                only:
                  - master
+      - deploy:
+          requires:
+            - test-node
+            - build
+            - release-approval
+          filters:
+             branches:
+               only:
+                 - master        
 
 
