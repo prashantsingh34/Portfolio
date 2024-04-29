@@ -45,6 +45,8 @@ jobs:
           command: | 
             docker push us-central1-docker.pkg.dev/elite-totality-418717/react-portfolio/portfolio-image
   release-approval:
+    docker:
+      - image: google/cloud-sdk
     steps:
       - checkout
   deploy:
