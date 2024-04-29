@@ -48,7 +48,10 @@ jobs:
     docker:
       - image: google/cloud-sdk
     steps:
-      - checkout    
+      - checkout
+      - run:
+          name: Get the current project
+          command: gcloud config get project     
       - run:
           name: Update the container image for the instance
           command: |
