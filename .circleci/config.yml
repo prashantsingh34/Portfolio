@@ -47,10 +47,10 @@ jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
-      - setup_remote_docker:
-          docker_layer_caching: true
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           name: Get the current project
           command: gcloud config get project     
