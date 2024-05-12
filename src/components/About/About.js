@@ -6,12 +6,13 @@ import Techstack from "./Techstack";
 import Aboutcard from "./AboutCard";
 import laptopImg from "../../Assets/about.png";
 import Toolstack from "./Toolstack";
+import logger from "../../logger";
 
 function About() {
   return (
     <Container fluid className="about-section">
       <Particle />
-      {console.info("Inside about page")}
+      {logger.info("Inside about page")}
       <Container>
         <Row style={{ justifyContent: "center", padding: "10px" }}>
           <Col
