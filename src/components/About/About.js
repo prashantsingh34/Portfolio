@@ -11,7 +11,7 @@ function About() {
   return (
     <Container fluid className="about-section">
       <Particle />
-      {console.log("Inside about page")}
+      {console.info("Inside about page")}
       <Container>
         <Row style={{ justifyContent: "center", padding: "10px" }}>
           <Col

@@ -14,7 +14,7 @@ function Projects() {
     <Container fluid className="project-section">
       <Particle />
       <Container>
-        {console.log("Inside projects page")}
+        {console.info("Inside projects page")}
         <h1 className="project-heading">
           My Recent <strong className="purple">Works </strong>
         </h1>
